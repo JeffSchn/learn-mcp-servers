@@ -1,6 +1,7 @@
 # MCP Server Dependencies
 # Core MCP library for creating Model Context Protocol servers
 mcp>=1.0.0
+fastmcp
 
 # Data processing libraries (for CSV server)
 pandas>=2.0.0

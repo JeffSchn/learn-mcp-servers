@@ -1,0 +1,18 @@
+# MCP Server Dependencies
+# Core MCP library for creating Model Context Protocol servers
+mcp>=1.0.0
+
+# Data processing libraries (for CSV server)
+pandas>=2.0.0
+
+# HTTP requests for API communication (for Power BI server)
+requests>=2.31.0
+
+# Keyring for secure token storage
+keyring>=23.0.1
+
+# Note: The following are part of Python's standard library and don't need to be installed:
+# - asyncio (async/await functionality)
+# - json (JSON parsing)
+# - os (environment variables)
+# - pathlib (path handling in Python 3.4+)

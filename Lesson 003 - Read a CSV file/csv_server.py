@@ -4,6 +4,8 @@ Minimal CSV Reader MCP Server (FastMCP)
 Example prompts to test this server:
 /read_csv file_path="/path/to/your/data.csv"
 /read_csv file_path="sales_data.csv"
+read the CSV file at "data/sales.csv"
+read the sample.csv file
 """
 
 # For reading and analyzing CSV files
@@ -18,7 +20,8 @@ mcp = FastMCP("csv-reader-server")
 
 @mcp.tool()
 def read_csv(file_path: str) -> str:
-    """Reads a CSV file and returns its contents and basic info.
+    """
+    Reads a CSV file and returns its contents and basic info.
     
     Use when: analyzing data files, checking CSV structure, or viewing data samples.
     Examples: 'read sales.csv', 'analyze the data file', 'show me what's in the CSV'

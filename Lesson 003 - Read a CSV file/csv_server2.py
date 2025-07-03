@@ -2,6 +2,7 @@
 Enhanced CSV Reader MCP Server with Aggregation (FastMCP)
 
 Example prompts to test this server:
+what are the total units sold by product in the sample CSV?
 /read_csv file_path="/path/to/your/data.csv"
 /aggregate_csv file_path="sample.csv" group_by="Category" agg_column="Sales_Amount" agg_function="sum"
 /aggregate_csv file_path="sample.csv" group_by="Region,Customer_Type" agg_column="Units_Sold" agg_function="mean"
@@ -19,7 +20,8 @@ mcp = FastMCP("csv-reader-server-enhanced")
 
 @mcp.tool()
 def read_csv(file_path: str) -> str:
-    """Reads a CSV file and returns its contents and basic info.
+    """
+    Reads a CSV file and returns its contents and basic info.
     
     Use when: analyzing data files, checking CSV structure, or viewing data samples.
     Examples: 'read sales.csv', 'analyze the data file', 'show me what's in the CSV'
@@ -55,7 +57,8 @@ def read_csv(file_path: str) -> str:
 
 @mcp.tool()
 def aggregate_csv(file_path: str, group_by: str, agg_column: str, agg_function: str) -> str:
-    """Aggregates data in a CSV file by grouping columns and applying aggregation functions.
+    """
+    Aggregates data in a CSV file by grouping columns and applying aggregation functions.
     
     Use when: calculating totals, averages, counts, or other statistics by category.
     Examples: 'sum sales by region', 'average units sold by category', 'count products by type'.

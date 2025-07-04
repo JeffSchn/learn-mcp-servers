@@ -15,7 +15,7 @@ You must be able to:
     - Anthropic MCP docs.
     - VS Code docs.
     - Python docs.
-- Be patient with me. This is the first time I'm teaching something based in Python. I'm putting this out there for free. 
+- Be patient with me. This is the first time I'm teaching something based in Python. I'm putting this out there for free.
 
 ### License
 
@@ -28,3 +28,11 @@ You are permitted to use the contents of this repo and derivatives thereof for n
 - The code and samples in this repo was created with assistance from Claude Opus 4.0 and Claude Sonnet 4.0.
 - The docs in this repo were created with assistance from Gemini 2.5 Pro.
 - No AI was used in the creation of creative materials or content.
+
+### Disclaimer
+
+_I do not consider myself an "AI Expert". I am trying to just share what I learned because I find it useful and interesting. The code, information, and examples in this repo are provided as-is without any warranties or guarantees. You are responsible for your own due-diligence and the code you execute or the information that you consume. Nothing I provide should be taken as advice in an official capacity._
+
+Be critical.
+Be skeptical.
+Be humble.

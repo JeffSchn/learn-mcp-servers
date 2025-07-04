@@ -1,12 +1,5 @@
 """
-Minimal Power BI MCP Server for querying and discovery (FastMCP)
-
-Example prompts to test this server:
-'How many workspaces do I have access to?'
-'What datasets are available in workspace X?'
-'How many measures are in the semantic model Y?'
-'What is the DAX for measure Z?'
-'What is the total sales by product category?'
+Minimal Power BI MCP Server - Version 3: Full Model Discovery
 """
 
 #region Imports
@@ -15,7 +8,6 @@ import requests
 import os
 import time
 import base64
-import keyring
 from fastmcp import FastMCP
 #endregion
 
@@ -28,13 +20,8 @@ mcp = FastMCP("powerbi-server")
 POWERBI_API = "https://api.powerbi.com/v1.0/myorg"
 FABRIC_API = "https://api.fabric.microsoft.com/v1"
 
-# Authentication - choose one approach:
-# Option 1: Environment variable (default)
+# Authentication
 TOKEN = os.environ.get("POWERBI_TOKEN", "")
-
-# Option 2: Keyring (recommended for Claude)
-# You must first run `keyring set powerbi token` in the terminal.
-# TOKEN = keyring.get_password("powerbi", "token")
 #endregion
 
 
@@ -89,8 +76,7 @@ def wait_for_operation(location_url, retry_seconds=30):
 #region MCP Tool Functions
 @mcp.tool()
 def list_workspaces() -> str:
-    """
-    List all Power BI workspaces you have access to.
+    """List all Power BI workspaces you have access to.
     Returns formatted list of workspace names and IDs.
     Examples: 'show my workspaces', 'what Power BI workspaces do I have?', 'list all workspaces'
     """
@@ -112,8 +98,7 @@ def list_workspaces() -> str:
 
 @mcp.tool()
 def list_datasets(workspace_id: str) -> str:
-    """
-    List all datasets in a specific workspace.
+    """List all datasets in a specific workspace.
     Returns formatted list of dataset names and IDs.
     Examples: 'show datasets in workspace X', 'what datasets are available?', 'list all semantic models'
     """
@@ -135,9 +120,8 @@ def list_datasets(workspace_id: str) -> str:
 
 @mcp.tool()
 def get_model_definition(workspace_id: str, dataset_id: str) -> str:
-    """
-    Get the complete TMDL definition of a semantic model including tables, columns, measures, and relationships.
-    Returns full model structure in TMDL format which is necessary to do before evaluating DAX queries.
+    """Get the complete TMDL definition of a dataset including tables, columns, measures, and relationships.
+    Returns full model structure in TMDL format with all DAX expressions.
     Examples: 'show me the data model', 'what tables are in this dataset?', 'get all measures and their DAX'
     """
     # Call Fabric API
@@ -187,35 +171,6 @@ def get_model_definition(workspace_id: str, dataset_id: str) -> str:
             output += f"\nError decoding {path}: {str(e)}\n"
     
     return output
-
-
-@mcp.tool()
-def execute_dax_query(workspace_id: str, dataset_id: str, query: str) -> str:
-    """
-    Execute a DAX query against a Power BI dataset.
-    Returns query results as JSON data.
-    Examples:
-        'tell me the total sales by product category',
-        'what is the revenue and profit by year and month?',
-        'how many customers are there by country?'
-    Example DAX queries:
-        "EVALUATE SUMMARIZECOLUMNS('Product'[Category], "@TotalSales", SUM('Sales'[Amount]))", 
-        "EVALUATE SUMMARIZECOLUMNS('Date'[Year], 'Date'[Month], "@Revenue", SUM('Sales'[Revenue]), "@Profit", SUM('Sales'[Profit]))", 
-        "EVALUATE SUMMARIZECOLUMNS('Customer'[Country], "@CustomerCount", COUNTROWS('Customer'))"
-    """
-    data = {"queries": [{"query": query}]}
-    url = f"{POWERBI_API}/groups/{workspace_id}/datasets/{dataset_id}/executeQueries"
-    result = make_request(url, method="POST", data=data)
-    
-    if "error" in result:
-        return f"Error: {result['error']}"
-    
-    # Just return the actual data
-    results = result.get("results", [])
-    if results and "tables" in results[0]:
-        return json.dumps(results[0]["tables"], indent=2)
-    else:
-        return "No data returned"
 #endregion
 
 

@@ -3,7 +3,7 @@
     {
       "id": "powerbi_token",
       "description": "Power BI API Token",
-      "type": "promptString", 
+      "type": "promptString",
       "password": true
     }
   ],
@@ -11,17 +11,23 @@
     "hello-world": {
       "type": "stdio",
       "command": "python3",
-      "args": ["Lesson 002 - Your first MCP server/helloworld_server.py"]
+      "args": [
+        "Lesson 002 - Your first MCP server/helloworld_server.py"
+      ]
     },
     "csv-server": {
       "type": "stdio",
       "command": "python3",
-      "args": ["Lesson 003 - Read a CSV file/csv_server2.py"]
+      "args": [
+        "Lesson 003 - Read a CSV file/csv_server2.py"
+      ]
     },
     "powerbi-server": {
-      "type": "stdio", 
-      "command": "python3",
-      "args": ["Lesson 004 - Query a Power BI model/powerbi_server.py"],
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "Lesson 004 - Query a Power BI model/powerbi_server.py"
+      ],
       "env": {
         "POWERBI_TOKEN": "${input:powerbi_token}"
       }

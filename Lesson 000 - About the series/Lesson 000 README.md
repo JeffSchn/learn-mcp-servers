@@ -64,6 +64,8 @@ git config --global user.email
     - The project should now be available in VS Code
     - You should see all the lesson folders in the Explorer panel
     - You're ready to start with Lesson 001.
+  
+8. Perform [first-time setup of GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup). You might want to start a trial for GitHub Copilot, too.
 
 ### Key takeaways
 

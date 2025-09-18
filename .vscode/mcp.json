@@ -1,18 +1,22 @@
 {
+  "inputs": [
+    {
+      "id": "powerbi_token",
+      "description": "Power BI API Token",
+      "type": "promptString",
+      "password": true
+    }
+  ],
   "servers": {
-    "hello-world": {
+    "powerbi-reader-server": {
       "type": "stdio",
       "command": "C:\\Users\\JeffSchniederjan\\anaconda3\\python.exe",
       "args": [
-        "helloworld_server.py"
-      ]
-    },
-      "csv-mcp": {
-      "type": "stdio",
-      "command": "C:\\Users\\JeffSchniederjan\\anaconda3\\python.exe",
-      "args": [
-        "Lesson 003 - Read a CSV file\\csv_server.py"
-      ]
+        "${workspaceFolder}/Lesson 004 - Query a Power BI model/powerbi_server.py"
+      ],
+      "env": {
+        "POWERBI_TOKEN": "${input:powerbi_token}"
+      }
     }
   }
 }

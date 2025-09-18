@@ -1,3 +1,12 @@
 {
-    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)"
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "chat.mcp.serverSampling": {
+        "learn-mcp-servers/.vscode/mcp.json: powerbi-reader-server": {
+            "allowedModels": [
+                "copilot/gpt-4.1",
+                "copilot/gpt-5-mini",
+                "copilot/gpt-5"
+            ]
+        }
+    }
 }
